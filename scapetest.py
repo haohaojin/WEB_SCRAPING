@@ -9,18 +9,17 @@ def getTitle(url):
         return None
     try:
         bsObj = BeautifulSoup(html.read(), "html.parser")
-        # = bsObj.find("span", {"class":"floblock"}).find_all(lambda tag: tag.getText() == '下一页')
+        h3list = bsObj.find_all("h3")
+        for recipe in h3list:
+            print(recipe.getText())
         title = bsObj.find_all(lambda tag: tag.getText() == '下一页')
+        if (len(title) != 0):
+            #print(title)
+            newpage = title[0].find("a").attrs['href']
+            #print(newpage)
+            getTitle(newpage)
     except AttributeError as e:
         return None
-    return title
 
-title = getTitle("http://www.douguo.com/u/u30362766298239/recipe")
 
-if title == None:
-    print("Title could not be found")
-else:
-    print(len(title))
-
-for t in title:
-    print(t)
+getTitle("http://www.douguo.com/u/u30362766298239/recipe")
