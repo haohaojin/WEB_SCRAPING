@@ -9,14 +9,17 @@ def getTitle(url):
         return None
     try:
         bsObj = BeautifulSoup(html.read(), "html.parser")
-        title = bsObj.body.h1
+        title = bsObj.find_all("h3")
     except AttributeError as e:
         return None
     return title
 
-title = getTitle("http://www.pythonscraping.com/exercises/exercise1.html")
+title = getTitle("http://www.douguo.com/u/u30362766298239/recipe")
 
 if title == None:
     print("Title could not be found")
 else:
-    print(title)
+    print(len(title))
+
+for t in title:
+    print(t.getText())
