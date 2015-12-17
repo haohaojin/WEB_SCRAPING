@@ -9,7 +9,8 @@ def getTitle(url):
         return None
     try:
         bsObj = BeautifulSoup(html.read(), "html.parser")
-        title = bsObj.find_all("h3")
+        # = bsObj.find("span", {"class":"floblock"}).find_all(lambda tag: tag.getText() == '下一页')
+        title = bsObj.find_all(lambda tag: tag.getText() == '下一页')
     except AttributeError as e:
         return None
     return title
@@ -22,4 +23,4 @@ else:
     print(len(title))
 
 for t in title:
-    print(t.getText())
+    print(t)

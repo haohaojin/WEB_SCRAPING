@@ -1,6 +1,7 @@
 from urllib.request import urlopen
 from bs4 import BeautifulSoup
-html = urlopen("http://www.pythonscraping.com/pages/page3.html")
+html = urlopen("http://en.wikipedia.org/wiki/Kevin_Bacon")
 bsObj = BeautifulSoup(html)
-for sibling in bsObj.find("table",{"id":"giftList"}).tr.next_siblings:
-    print(sibling)
+for link in bsObj.findAll("a"):
+    if 'href' in link.attrs:
+        print(link.attrs['href'])
