@@ -2,6 +2,20 @@ from urllib.request import urlopen
 from urllib.error import HTTPError
 from bs4 import BeautifulSoup
 
+
+
+def getRank(url):
+    try:
+        html = urlopen(url)
+    except HTTPError as e:
+        return None
+    try:
+        bsObj = BeautifulSoup(html.read(), "html.parser")
+        title = bsObj.find_all("font", {"id":"collectsnum"}) # .parent.previous_sibling.get_text()
+        return title[0].getText()
+    except AttributeError as e:
+        return None
+
 def getTitle(url):
     try:
         html = urlopen(url)
@@ -12,7 +26,7 @@ def getTitle(url):
         h3list = bsObj.find_all("h3")
         for recipe in h3list:
             #if "圣诞" in recipe.getText() and "糖霜" in recipe.getText():
-                print(recipe.getText() + "|" + recipe.find("a").attrs['href'])
+                print(getRank(recipe.find("a").attrs['href']) + "|" + recipe.getText() + "|" + recipe.find("a").attrs['href'])
         title = bsObj.find_all(lambda tag: tag.getText() == '下一页')
         if (len(title) != 0):
             #print(title)
@@ -27,4 +41,4 @@ def getTitle(url):
 
 # Breadmum http://www.douguo.com/u/u30362766298239/recipe
 # 胡小may http://www.douguo.com/u/u55783496151049/recipe
-getTitle("http://www.douguo.com/u/u21252191430097/recipe")
+getTitle("http://www.douguo.com/u/u30362766298239/recipe")
