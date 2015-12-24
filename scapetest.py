@@ -84,6 +84,7 @@ def getRecipe(user,url):
             writer.writerow((user, today.strftime('%Y/%m/%d'), created_date.strftime('%Y/%m/%d'), getVisit(recipe_url),
                              getBookmark(recipe.find("a").attrs['href']), recipe.getText(),
                              recipe.find("a").attrs['href']))
+            csvFile.close()
         title = bsObj.find_all(lambda tag: tag.getText() == '下一页')
         if (len(title) != 0):
             # print(title)
@@ -126,7 +127,7 @@ searchListFull = {'Breadmum': 'http://www.douguo.com/u/u30362766298239/recipe', 
               '臭美园妈': 'http://www.douguo.com/u/u5536282897462/recipe',
               '拾光机': 'http://www.douguo.com/u/u54285202635742/recipe',
               '糖小饼': 'http://www.douguo.com/u/u40952060753467/recipe',
-              'Snaker的音樂厨房': 'http://www.douguo.com/u/u23231065/caidan',
+              'Snaker的音樂厨房': 'http://www.douguo.com/u/u23231065/recipe',
               '君之': 'http://www.douguo.com/u/u08363793/recipe',
               'lovestory9': 'http://www.douguo.com/u/u06633444602482/recipe'
               }
@@ -134,33 +135,33 @@ searchListFull = {'Breadmum': 'http://www.douguo.com/u/u30362766298239/recipe', 
 searchList = {'Breadmum': 'http://www.douguo.com/u/u30362766298239/recipe', #
               '胡小may': 'http://www.douguo.com/u/u55783496151049/recipe', #
               '美国厨娘': 'http://www.douguo.com/u/u35246655713154/recipe',
-              #'小米554': 'http://www.douguo.com/u/u21252191430097/recipe', #
+              '小米554': 'http://www.douguo.com/u/u21252191430097/recipe', #
               '爱生活的馋猫': 'http://www.douguo.com/u/u20468009171777/recipe',#
-              #'夏夏夏洛特的烤箱': 'http://www.douguo.com/u/u42706554805034/recipe',#
-              #'牛一的小饭桌和大饭': 'http://www.douguo.com/u/u0722865253319/recipe',
+              '夏夏夏洛特的烤箱': 'http://www.douguo.com/u/u42706554805034/recipe',#
+              '牛一的小饭桌和大饭': 'http://www.douguo.com/u/u0722865253319/recipe',
               '恬萝姑娘': 'http://www.douguo.com/u/u07131690939285/recipe',
-              #'Lola_ohlala': 'http://www.douguo.com/u/u0653952018640/recipe',
+              'Lola_ohlala': 'http://www.douguo.com/u/u0653952018640/recipe',
               '默默扒猪皮': 'http://www.douguo.com/u/u96695973600527/recipe',
               '兔美酱': 'http://www.douguo.com/u/u90220649629766/recipe',
               '亦梦亦乐Angel': 'http://www.douguo.com/u/u83785502684561/recipe',
               '我家厨房香喷喷': 'http://www.douguo.com/u/u79475897300517/recipe',
               '饭小小': 'http://www.douguo.com/u/u70173438368099/recipe',
-              #'纷纷712': 'http://www.douguo.com/u/u65346612779426/recipe',
-              #'肥小菇': 'http://www.douguo.com/u/u6376841712552/recipe',
+              '纷纷712': 'http://www.douguo.com/u/u65346612779426/recipe',
+              '肥小菇': 'http://www.douguo.com/u/u6376841712552/recipe',
               'Tella陈珊珊': 'http://www.douguo.com/u/u63256997684102/recipe',
-              #'美美家的厨房': 'http://www.douguo.com/u/u57369189548912/recipe',
+              '美美家的厨房': 'http://www.douguo.com/u/u57369189548912/recipe',
               '臭美园妈': 'http://www.douguo.com/u/u5536282897462/recipe',
               '拾光机': 'http://www.douguo.com/u/u54285202635742/recipe',
               '糖小饼': 'http://www.douguo.com/u/u40952060753467/recipe',
-              'Snaker的音樂厨房': 'http://www.douguo.com/u/u23231065/caidan',
-              '君之': 'http://www.douguo.com/u/u08363793/recipe'
-              #'lovestory9': 'http://www.douguo.com/u/u06633444602482/recipe'
+              'Snaker的音樂厨房': 'http://www.douguo.com/u/u23231065/recipe',
+              '君之': 'http://www.douguo.com/u/u08363793/recipe',
+              'lovestory9': 'http://www.douguo.com/u/u06633444602482/recipe'
               }
 
 today = datetime.date.today()
 
 
-with open("C:/Users/haoji/Desktop/Python/" + str(today) + ".csv", 'w', newline='') as csvFile:
+with open("C:/Users/haoji/Desktop/Python/" + str(today) + ".csv", 'w', newline='',encoding='UTF-8') as csvFile:
     writer = csv.writer(csvFile)
     writer.writerow(('User','Added Date', 'Created Date', 'Visited', 'Bookmarked', 'Name', 'Link'))
     for i in searchList:
