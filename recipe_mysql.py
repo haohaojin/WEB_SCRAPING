@@ -7,15 +7,19 @@ cur.execute("USE breadmum_recipe")
 
 user = 'test'
 user_sql = '\"' + user + '\"'
-date = '2015-12-24'
-date_sql = '\"' + user + '\"'
-created_date = '2015-12-24'
-visited = 111
-bookmarked = 222
+date = '2015-12-27'
+date_sql = '\"' + date + '\"'
+created_date = '2015-12-25'
+created_date_sql = '\"' + created_date + '\"'
+visited = 999
+bookmarked = 888
 name = ' 芝麻曲奇饼/饼干'
-link = 'http://www.'
+name_sql = '\"' + name + '\"'
+link = 'testall'
+link_sql = '\"' + link + '\"'
 
-sql = "INSERT INTO `recipe` (`user`, `date`, `created_date`, `visited`, `bookmarked`, `name`, `link`) VALUES (" + user_sql + ", '2015-12-24', '2015-09-25', 34775, 2028, ' 芝麻曲奇饼/饼干', 'http://www.douguo.com/cookbook/10425823311.html')"
+sql = "REPLACE INTO `recipe` (`user`, `date`, `created_date`, `visited`, `bookmarked`, `name`, `link`) VALUES (" + user_sql + ", " + date_sql + ", " + created_date_sql + ", " + str(
+    visited) + ", " + str(bookmarked) + ", " + name_sql + ", " + link_sql + ")"
 print(sql)
 cur.execute(sql)
 cur.connection.commit()
